@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://alzarraei-gpts.github.io/Arabic-GPT-Hub-books/sitemap.xml
