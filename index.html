@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arabic GPT Hub Books – مكتبة الذكاء الاصطناعي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:title" content="Arabic GPT Hub Books – مكتبة الذكاء الاصطناعي بالعربية" />
+  <meta property="og:description" content="حمّل سلسلة كتب الذكاء الاصطناعي باللغة العربية مجانًا، وشاركنا رأيك لتطوير المحتوى العربي." />
+  <meta property="og:image" content="https://alzarraei-gpts.github.io/Arabic-GPT-Hub-books/banner.png" />
+  <meta property="og:url" content="https://alzarraei-gpts.github.io/Arabic-GPT-Hub-books/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    body {
+      background-color: #f4f8fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      margin: 0;
+      color: #2c3e50;
+    }
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .book-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 400px;
+    }
+    button {
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    iframe {
+      width: 90%;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      display: none;
+    }
+    img.banner {
+      max-width: 280px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <img src="banner.png" alt="مكتبة الذكاء الاصطناعي" class="banner" />
+  <h1>📚 مكتبة Arabic GPT</h1>
+  <p>اختر كتابًا لعرضه مباشرة داخل الصفحة:</p>
+
+  <div class="book-list">
+    <button onclick="openBook('the-emerging-machine.pdf')">🔹 الآلة التي وُلِدت</button>
+    <button onclick="openBook('the-thinking-machine.pdf')">🔹 الآلة التي تُفكّر</button>
+    <button onclick="openBook('the-conversing-machine.pdf')">🔹 الآلة التي تُحاور</button>
+    <button onclick="openBook('the-feeling-machine.pdf')">🔹 الآلة التي تشعر</button>
+    <button onclick="openBook('the-imitating-machine.pdf')">🔹 الآلة التي تُقلّد</button>
+    <button onclick="openBook('the-creating-machine.pdf')">🔹 الآلة التي تُبدِع</button>
+    <button onclick="openBook('the-learning-machine.pdf')">🔹 الآلة التي تتعلّم</button>
+  </div>
+
+  <iframe id="pdfFrame"></iframe>
+
+  <script>
+    function openBook(file) {
+      const frame = document.getElementById('pdfFrame');
+      fetch(file)
+        .then(response => {
+          if (!response.ok) {
+            alert('⚠️ عذرًا، لم يتم العثور على هذا الكتاب.');
+            return;
+          }
+          frame.src = file;
+          frame.style.display = 'block';
+          frame.scrollIntoView({ behavior: 'smooth' });
+        })
+        .catch(() => {
+          alert('❌ حدث خطأ أثناء تحميل الملف.');
+        });
+    }
+  </script>
+</body>
+</html>
