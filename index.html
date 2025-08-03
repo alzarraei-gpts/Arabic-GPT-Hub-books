@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arabic GPT Hub Books – مكتبة الذكاء الاصطناعي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:title" content="Arabic GPT Hub Books – مكتبة الذكاء الاصطناعي بالعربية" />
+  <meta property="og:description" content="حمّل سلسلة كتب الذكاء الاصطناعي باللغة العربية مجانًا، وشاركنا رأيك لتطوير المحتوى العربي." />
+  <meta property="og:image" content="https://alzarraei-gpts.github.io/Arabic-GPT-Hub-books/banner.png" />
+  <meta property="og:url" content="https://alzarraei-gpts.github.io/Arabic-GPT-Hub-books/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    body {
+      background-color: #fdfdfd;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      margin: 0;
+      color: #333;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 2em;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #555;
+    }
+
+    .book-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .book-button {
+      padding: 14px;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .book-button:hover {
+      transform: scale(1.02);
+    }
+
+    .btn-birth     { background-color: #6c5ce7; } /* الأرجواني */
+    .btn-thinking  { background-color: #0984e3; } /* أزرق نقي */
+    .btn-talking   { background-color: #00cec9; } /* فيروزي */
+    .btn-feeling   { background-color: #e17055; } /* برتقالي */
+    .btn-imitating { background-color: #fd79a8; } /* وردي */
+    .btn-creating  { background-color: #fab005; } /* أصفر ذهبي */
+    .btn-learning  { background-color: #2ecc71; } /* أخضر زمرّدي */
+
+    iframe {
+      width: 90%;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 30px;
+      display: none;
+    }
+
+    img.banner {
+      max-width: 280px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="banner.png" alt="مكتبة الذكاء الاصطناعي" class="banner" />
+  <h1>📚 مكتبة Arabic GPT</h1>
+  <p>اختر كتابًا من القائمة لقراءته داخل الموقع مباشرة:</p>
+
+  <div class="book-list">
+    <button class="book-button btn-birth" onclick="openBook('the-emerging-machine.pdf')">👶 الآلة التي وُلِدت</button>
+    <button class="book-button btn-thinking" onclick="openBook('the-thinking-machine.pdf')">🧠 الآلة التي تُفكّر</button>
+    <button class="book-button btn-talking" onclick="openBook('the-conversing-machine.pdf')">💬 الآلة التي تُحاور</button>
+    <button class="book-button btn-feeling" onclick="openBook('the-feeling-machine.pdf')">💡 الآلة التي تشعر</button>
+    <button class="book-button btn-imitating" onclick="openBook('the-imitating-machine.pdf')">🎭 الآلة التي تُقلّد</button>
+    <button class="book-button btn-creating" onclick="openBook('the-creating-machine.pdf')">🎨 الآلة التي تُبدِع</button>
+    <button class="book-button btn-learning" onclick="openBook('the-learning-machine.pdf')">📘 الآلة التي تتعلّم</button>
+  </div>
+
+  <iframe id="pdfFrame"></iframe>
+
+  <script>
+    function openBook(file) {
+      const frame = document.getElementById('pdfFrame');
+      fetch(file)
+        .then(response => {
+          if (!response.ok) {
+            alert('⚠️ عذرًا، لم يتم العثور على هذا الكتاب.');
+            return;
+          }
+          frame.src = file;
+          frame.style.display = 'block';
+          frame.scrollIntoView({ behavior: 'smooth' });
+        })
+        .catch(() => {
+          alert('❌ حدث خطأ أثناء تحميل الملف.');
+        });
+    }
+  </script>
+</body>
+</html>
