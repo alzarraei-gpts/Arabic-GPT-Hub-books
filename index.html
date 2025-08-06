@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مكتبة الآلة الذكية</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #2c3e50;
+    }
+    h2 {
+      text-align: center;
+      font-size: 1.8em;
+      color: #34495e;
+      margin-top: 30px;
+    }
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .book-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    a.download-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #27ae60;
+      font-weight: bold;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: rgba(0,0,0,0.8);
+    }
+    .modal-content {
+      position: relative;
+      margin: 40px auto;
+      padding: 0;
+      width: 90%;
+      height: 85%;
+      max-width: 1000px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-header {
+      background: #3498db;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .modal-body iframe {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    .close {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h2>📚 قائمة الكتب المتاحة</h2>
+<div class="book-grid">
+
+  <div class="book-card">
+    <h3>الآلة التي وُلِدت</h3>
+    <button onclick="openModal('the-emerging-machine.pdf')">📖 عرض الكتاب</button>
+    <a href="the-emerging-machine.pdf" download class="download-link">⬇️ تحميل</a>
+  </div>
+
+  <div class="book-card">
+    <h3>الآلة التي تُفكّر</h3>
+    <button onclick="openModal('the-thinking-machine.pdf')">📖 عرض الكتاب</button>
+    <a href="the-thinking-machine.pdf" download class="download-link">⬇️ تحميل</a>
+  </div>
+
+  <div class="book-card">
+    <h3>الآلة التي تُحاور</h3>
+    <button onclick="openModal('the-conversing-machine.pdf')">📖 عرض الكتاب</button>
+    <a href="the-conversing-machine.pdf" download class="download-link">⬇️ تحميل</a>
+  </div>
+
+  <div class="book-card">
+    <h3>الآلة التي تشعر</h3>
+    <button onclick="openModal('the-feeling-machine.pdf')">📖 عرض الكتاب</button>
+    <a href="the-feeling-machine.pdf" download class="download-link">⬇️ تحميل</a>
+  </div>
+
+  <div class="book-card">
+    <h3>الآلة التي تُقلّد</h3>
+    <button onclick="openModal('the-imitating-machine.pdf')">📖 عرض الكتاب</button>
+    <a href="the-imitating-machine.pdf" download class="download-link">⬇️ تحميل</a>
+  </div>
+
+  <div class="book-card">
+    <h3>الآلة التي تُبدِع</h3>
+    <button onclick="openModal('the-creating-machine.pdf')">📖 عرض الكتاب</button>
+    <a href="the-creating-machine.pdf" download class="download-link">⬇️ تحميل</a>
+  </div>
+
+  <div class="book-card">
+    <h3>الآلة التي تتعلّم</h3>
+    <button onclick="openModal('the-learning-machine.pdf')">📖 عرض الكتاب</button>
+    <a href="the-learning-machine.pdf" download class="download-link">⬇️ تحميل</a>
+  </div>
+
+  <div class="book-card">
+    <h3>الآلة التي تستشرف</h3>
+    <button onclick="openModal('the-anticipating-machine.pdf')">📖 عرض الكتاب</button>
+    <a href="the-anticipating-machine.pdf" download class="download-link">⬇️ تحميل</a>
+  </div>
+
+</div>
+
+<div id="bookModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>📘 عرض الكتاب</span>
+      <span class="close" onclick="closeModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <iframe id="bookFrame" src=""></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(file) {
+  document.getElementById("bookFrame").src = file;
+  document.getElementById("bookModal").style.display = "block";
+}
+function closeModal() {
+  document.getElementById("bookModal").style.display = "none";
+  document.getElementById("bookFrame").src = "";
+}
+window.onclick = function(event) {
+  const modal = document.getElementById("bookModal");
+  if (event.target === modal) {
+    closeModal();
+  }
+}
+</script>
+
+</body>
+</html>
