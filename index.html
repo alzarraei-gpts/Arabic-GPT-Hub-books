@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مكتبة الآلة الذكية - واجهة احترافية متقدمة</title>
+  <meta name="description" content="مكتبة شاملة لكتب الذكاء الاصطناعي مع واجهة احترافية لفتح وإغلاق الملفات">
+  <meta name="keywords" content="ذكاء اصطناعي, كتب, مكتبة, قراءة, تحميل">
+  <meta name="author" content="مكتبة الآلة الذكية">
+  
+  <!-- ربط ملف CSS -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- خطوط عربية محسنة -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* تحسينات إضافية للخطوط العربية */
+    body {
+      font-family: 'Cairo', 'Segoe UI', 'Tajawal', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    /* تحسين عرض الأيقونات */
+    .emoji {
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+    }
+    
+    /* تحسينات للأداء */
+    .book-card {
+      will-change: transform;
+    }
+    
+    .btn {
+      will-change: transform, box-shadow;
+    }
+    
+    /* تحسين التباين للوصولية */
+    @media (prefers-contrast: high) {
+      :root {
+        --btn-read-bg: rgba(52, 152, 219, 0.2);
+        --btn-download-bg: rgba(39, 174, 96, 0.2);
+        --btn-close-bg: rgba(231, 76, 60, 0.2);
+        --btn-info-bg: rgba(155, 89, 182, 0.2);
+        --btn-warning-bg: rgba(243, 156, 18, 0.2);
+      }
+    }
+    
+    /* تحسين للحركة المخفضة */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- شاشة التحميل -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="container">
+    <!-- الهيدر الرئيسي -->
+    <header>
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo">
+            <span class="emoji">🤖</span>
+          </div>
+          <div class="title-section">
+            <h1>مكتبة الآلة الذكية</h1>
+            <p>مجموعة شاملة من كتب الذكاء الاصطناعي مع واجهة احترافية متقدمة</p>
+          </div>
+        </div>
+        <div class="nav-buttons">
+          <button class="btn btn-primary" onclick="showAllBooks()" title="عرض جميع الكتب المتاحة">
+            <span class="emoji">📚</span> عرض جميع الكتب
+          </button>
+          <button class="btn btn-warning" onclick="closeAllFiles()" title="إغلاق جميع الملفات المفتوحة">
+            <span class="emoji">❌</span> إغلاق جميع الملفات
+          </button>
+          <button class="btn btn-info" onclick="showStatistics()" title="عرض إحصائيات الاستخدام">
+            <span class="emoji">📊</span> الإحصائيات
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- إدارة الملفات المفتوحة -->
+    <div class="file-manager">
+      <h2>
+        <span class="emoji">📁</span> إدارة الملفات المفتوحة
+      </h2>
+      <div class="open-files" id="openFiles">
+        <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
+      </div>
+      <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+        <button class="btn btn-success" onclick="openRandomBook()" title="فتح كتاب عشوائي">
+          <span class="emoji">🎲</span> فتح كتاب عشوائي
+        </button>
+        <button class="btn btn-info" onclick="openMultipleBooks()" title="فتح عدة كتب معاً">
+          <span class="emoji">📖</span> فتح عدة كتب
+        </button>
+      </div>
+    </div>
+
+    <!-- شبكة الكتب -->
+    <div class="books-grid" id="booksGrid">
+      <!-- سيتم إنشاء بطاقات الكتب هنا بواسطة JavaScript -->
+    </div>
+
+    <!-- معلومات إضافية -->
+    <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 20px; padding: 30px; margin-top: 40px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); text-align: center;">
+      <h3 style="color: var(--primary-color); margin-bottom: 20px; font-size: 1.5em;">
+        <span class="emoji">💡</span> نصائح للاستخدام
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: right;">
+        <div style="padding: 15px; background: rgba(52, 152, 219, 0.1); border-radius: 10px; border-right: 4px solid #3498db;">
+          <strong style="color: #2980b9;">⌨️ اختصارات لوحة المفاتيح:</strong><br>
+          <small style="color: #7f8c8d;">Ctrl+O: فتح كتاب عشوائي<br>Ctrl+W: إغلاق جميع الملفات<br>Ctrl+S: عرض الإحصائيات</small>
+        </div>
+        <div style="padding: 15px; background: rgba(39, 174, 96, 0.1); border-radius: 10px; border-right: 4px solid #27ae60;">
+          <strong style="color: #27ae60;">📱 دعم الأجهزة المحمولة:</strong><br>
+          <small style="color: #7f8c8d;">واجهة متجاوبة مع دعم كامل للمس والإيماءات</small>
+        </div>
+        <div style="padding: 15px; background: rgba(155, 89, 182, 0.1); border-radius: 10px; border-right: 4px solid #9b59b6;">
+          <strong style="color: #8e44ad;">🔄 حفظ تلقائي:</strong><br>
+          <small style="color: #7f8c8d;">يتم حفظ حالة الملفات المفتوحة تلقائياً</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer style="text-align: center; padding: 30px 0; color: rgba(255, 255, 255, 0.8); margin-top: 40px;">
+      <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.2);">
+        <p style="margin: 0; font-size: 1.1em; font-weight: 600;">
+          <span class="emoji">🤖</span> مكتبة الآلة الذكية - واجهة احترافية لإدارة الكتب
+        </p>
+        <p style="margin: 10px 0 0 0; font-size: 0.9em; opacity: 0.8;">
+          تم تطوير هذه الواجهة بتقنيات حديثة لتوفير تجربة مستخدم متميزة
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ربط ملف JavaScript -->
+  <script src="app.js"></script>
+  
+  <!-- سكريبت إضافي للتحسينات -->
+  <script>
+    // تحسين الأداء - تحميل الصور بشكل تدريجي
+    document.addEventListener('DOMContentLoaded', function() {
+      // إضافة مؤثرات بصرية عند التحميل
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease-in';
+      
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+      
+      // تحسين الأداء للأجهزة الضعيفة
+      if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+        document.documentElement.style.setProperty('--transition-medium', 'all 0.2s ease');
+        document.documentElement.style.setProperty('--transition-slow', 'all 0.3s ease');
+      }
+      
+      // دعم الوضع المظلم
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.style.setProperty('--primary-color', '#ecf0f1');
+        document.documentElement.style.setProperty('--muted-color', '#bdc3c7');
+      }
+    });
+    
+    // تحسين الاستجابة للوحة المفاتيح
+    document.addEventListener('keydown', function(e) {
+      // إضافة دعم للتنقل بالأسهم
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        const buttons = document.querySelectorAll('.btn:not([style*="display: none"])');
+        const currentIndex = Array.from(buttons).findIndex(btn => btn === document.activeElement);
+        
+        if (currentIndex !== -1) {
+          e.preventDefault();
+          const nextIndex = e.key === 'ArrowDown' 
+            ? Math.min(currentIndex + 1, buttons.length - 1)
+            : Math.max(currentIndex - 1, 0);
+          buttons[nextIndex].focus();
+        }
+      }
+    });
+    
+    // تحسين إمكانية الوصول
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('focus', function() {
+        this.style.outline = '3px solid rgba(52, 152, 219, 0.5)';
+        this.style.outlineOffset = '2px';
+      });
+      
+      btn.addEventListener('blur', function() {
+        this.style.outline = 'none';
+      });
+    });
+    
+    // مراقبة الأداء
+    if ('performance' in window) {
+      window.addEventListener('load', function() {
+        setTimeout(() => {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          console.log('وقت تحميل الصفحة:', Math.round(perfData.loadEventEnd - perfData.fetchStart), 'ms');
+        }, 0);
+      });
+    }
+    
+    // دعم Service Worker للتخزين المؤقت (اختياري)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        // يمكن إضافة Service Worker هنا للتخزين المؤقت
+      });
+    }
+  </script>
+</body>
+</html>
+
